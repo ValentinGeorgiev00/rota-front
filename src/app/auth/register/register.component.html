@@ -1,0 +1,55 @@
+<main>
+	<mat-card>
+		<mat-card-title>Register</mat-card-title>
+		<mat-card-content>
+			<form [formGroup]="form" (ngSubmit)="submit()">
+				<div class="input-fields">
+					<mat-form-field>
+						<input type="text" matInput placeholder="Name" formControlName="name" />
+						<mat-error *ngIf="nameFormControl.touched && nameFormControl.invalid" >
+							{{getErrMsg(nameFormControl, 'Name')}}
+						</mat-error>
+					</mat-form-field>
+					<mat-form-field>
+						<input type="email" matInput placeholder="Email" formControlName="email" />
+						<mat-error *ngIf="emailFormControl.touched && emailFormControl.invalid" >
+							{{getErrMsg(emailFormControl, 'Email')}}
+						</mat-error>
+					</mat-form-field>
+					<mat-form-field>
+						<input type="password" matInput placeholder="Password" formControlName="password" />
+						<mat-error *ngIf="passwordFormControl.touched && passwordFormControl.invalid" >
+							{{getErrMsg(passwordFormControl, 'Password')}}
+						</mat-error>
+					</mat-form-field>
+					<mat-form-field>
+						<input type="password" matInput placeholder="Repeat password" formControlName="rePassword" />
+						<mat-error *ngIf="rePasswordFormControl.touched && rePasswordFormControl.invalid" >
+							{{getRePasswordErrMsg(rePasswordFormControl, 'Confirm password')}}
+						</mat-error>
+					</mat-form-field>
+					<input #driverLicense class="file-input" type="file" (change)="selectImg($event)" />
+					<div class="file-upload">
+						<div class="row">
+							<button mat-mini-fab type="button" color="primary" class="upload-btn"
+								(click)="fileName || fileInputError ? clearImg(driverLicense) : driverLicense.click()">
+								<mat-icon>{{fileName || fileInputError ? 'clear' : 'attach_file'}}</mat-icon>
+							</button>
+							<div>
+								{{fileName || "Upload driver license image in 'jpg' or 'png' format"}}
+							</div>
+						</div>
+						<mat-error class="file-input-error" *ngIf="fileInputError">{{fileInputError}}</mat-error>
+					</div>
+				</div>
+				<div class="button">
+					<div>
+						Have an account?
+						<a routerLink="/auth/login">Log in</a>
+					</div>
+					<button type="submit" mat-button>Register</button>
+				</div>
+			</form>
+		</mat-card-content>
+	</mat-card>
+</main>

@@ -1,0 +1,53 @@
+mat-card-title,
+mat-card-content {
+	display: flex;
+	justify-content: center;
+}
+mat-card {
+	margin: 2rem 0;
+}
+mat-form-field {
+	width: 280px;
+	margin: 0.5rem 0;
+}
+
+button, a[mat-raised-button] {
+	background-color: rgb(6, 38, 64);
+	color: white;
+	width: 20ch;
+}
+
+.year {
+	pointer-events: none;
+	color: black;
+}
+
+.button {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.input-fields {
+	display: flex;
+	gap: 30px;
+	margin-bottom: 30px;
+	width: 760px;
+}
+
+mat-datepicker-toggle {
+	font-size: 1.5rem;
+}
+
+.date {
+	width: 10ch;
+}
+
+.left, .right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  margin: 10px;
+}

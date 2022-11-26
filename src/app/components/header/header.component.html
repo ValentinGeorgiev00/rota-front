@@ -1,0 +1,10 @@
+<header>
+	<ul *ngIf="!accessToken" class="navigation">
+		<li><a [routerLink]="['auth','login']"> Login </a></li>
+		<li><a [routerLink]="['auth', 'register']"> Register </a></li>
+	</ul>
+	<ul *ngIf="accessToken" class="navigation logged">
+			<li><a [routerLink]="['cars']"> Cars </a></li>
+			<li><a (click)="onLogout()"> Logout </a></li>
+	</ul>
+</header>

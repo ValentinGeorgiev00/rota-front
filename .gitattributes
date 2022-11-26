@@ -1,2 +1,8 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+* text		eol=lf
+
+*.png		-text diff
+*.jpg		-text diff
+*.ttf		-text diff
+*.eot		-text diff
+*.woff		-text diff
+*.woff2		-text diff

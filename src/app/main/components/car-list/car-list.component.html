@@ -1,0 +1,56 @@
+<main>
+	<div *ngIf="userRole === 'ADMIN'" class="admin">
+		<a mat-raised-button [routerLink]="['create']"> Create </a>
+	</div>
+	<form *ngIf="filteredCars" [formGroup]="form" class="search-form" (ngSubmit)="submit()">
+		<button mat-mini-fab color="primary" class="search-btn">
+			<mat-icon>search</mat-icon>
+		</button>
+		<mat-form-field class="search-full-width" appearance="outline">
+			<mat-label>Model</mat-label>
+			<input type="text" aria-label="Model" matInput formControlName="model" [matAutocomplete]="auto">
+			<mat-autocomplete #auto="matAutocomplete">
+				<mat-option *ngFor="let option of filteredOptions | async" [value]="option" (click)="submit()">
+					{{option}}
+				</mat-option>
+			</mat-autocomplete>
+		</mat-form-field>
+	</form>
+	<div *ngIf="filteredCars && filteredCars.length === 0" class="no-cars">
+		<img
+			src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGOBo2HfwSuyZ-cLJFIGnz3-HqAuhopFwjEA&usqp=CAU"
+			alt="no data image"
+		>
+	</div>
+	<div *ngIf=" filteredCars && filteredCars.length > 0" class="cards">
+		<mat-card *ngFor="let car of filteredCars" class="wrapper">
+			<mat-card-header>
+				<mat-card-title>{{car.model}}</mat-card-title>
+			</mat-card-header>
+			<mat-card-content>
+				<div class="content">
+					<div class="img">
+						<img [src]="
+								car.carPicture
+								? car.carPicture
+								: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png'
+							"
+							alt="There is no available image"
+						/>
+					</div>
+				<div class="info">
+					<div><span>type:</span>{{car.type}}</div>
+					<div><span>fuel type:</span>{{car.fuelType}}</div>
+					<div><span>year:</span>{{car.year}}</div>
+				</div>
+				</div>
+				<mat-card-content class="info additional-info">
+					<div class="container">
+						<div class="overflow"><span>price per day:</span>{{car.pricePerDay}} BGN</div>
+						<div><span>car number:</span>{{car.carNumber}}</div>
+					</div>
+				</mat-card-content>
+			</mat-card-content>
+		</mat-card>
+	</div>
+</main>

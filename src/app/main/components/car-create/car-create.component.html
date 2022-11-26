@@ -1,0 +1,119 @@
+<main>
+	<mat-card>
+		<mat-card-title>Create car</mat-card-title>
+		<mat-card-content>
+			<form [formGroup]="form" (ngSubmit)="submit()">
+				<div class="input-fields">
+					<div class="left">
+					<mat-form-field>
+						<input #plate (blur)="formatLicensePlate(plate)" type="text" matInput placeholder="License plate" formControlName="registrationNumber" />
+						<mat-error *ngIf="registrationNumberFormControl.touched && registrationNumberFormControl.invalid" >
+							{{getErrMsg(registrationNumberFormControl, 'License plate')}}
+						</mat-error>
+					</mat-form-field>
+					<mat-form-field>
+						<mat-label for="carType">Type of a car</mat-label>
+						<mat-select formControlName="carType">
+							<mat-option *ngFor="let carType of types" [value]="carType">
+								{{ carType }}
+							</mat-option>
+						</mat-select>
+						<mat-error *ngIf="carTypeFormControl.touched && carTypeFormControl.invalid" >
+							{{getErrMsg(carTypeFormControl, 'Car type')}}
+						</mat-error>
+					</mat-form-field>
+					<mat-form-field [hideRequiredMarker]="true">
+						<input #model type="text" matInput placeholder="Make" formControlName="make" />
+						<mat-error *ngIf="makeFormControl.touched && makeFormControl.invalid" >
+							{{getErrMsg(makeFormControl, 'Make')}}
+						</mat-error>
+					</mat-form-field>
+					<mat-form-field [hideRequiredMarker]="true">
+						<input #model type="text" matInput placeholder="Model" formControlName="model" />
+						<mat-error *ngIf="modelFormControl.touched && modelFormControl.invalid" >
+							{{getErrMsg(modelFormControl, 'Model')}}
+						</mat-error>
+					</mat-form-field>
+					<mat-form-field (click)="dp.open()">
+						 <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+						<mat-label for="year">Year</mat-label>
+						<input
+							class="year"
+							#dpInput
+							(click)="openPicker(dp)"
+							matInput [matDatepicker]="dp"
+							formControlName="year"
+							[min]="minDate"
+							[max]="maxDate"
+							[disabled]="true"
+						>
+						<mat-datepicker #dp
+							startView="multi-year"
+							(yearSelected)="chosenYear($event, dp, dpInput)"
+							disabled="false"
+						>
+						</mat-datepicker>
+						<mat-error *ngIf="yearFormControl.touched && yearFormControl.invalid" >
+							{{getErrMsg(yearFormControl, 'Year')}}
+						</mat-error>
+					</mat-form-field>
+					</div>
+					<div class="right">
+					<mat-form-field>
+						<input
+							#price
+							(blur)="formatPriceInput(price)"
+							type="text"
+							matInput
+							placeholder="Price per day"
+							formControlName="pricePerDay"
+							twoDecimalNumber
+						/>
+						<mat-error *ngIf="pricePerDayFormControl.touched && pricePerDayFormControl.invalid" >
+							{{getErrMsg(pricePerDayFormControl, 'Price per day')}}
+						</mat-error>
+					</mat-form-field>
+					<mat-form-field>
+						<mat-label for="fuelType">Fuel type</mat-label>
+						<mat-select formControlName="fuelType">
+							<mat-option *ngFor="let fuelType of fuelTypes" [value]="fuelType">
+								{{ fuelType }}
+							</mat-option>
+						</mat-select>
+						<mat-error *ngIf="fuelTypeFormControl.touched && fuelTypeFormControl.invalid" >
+							{{getErrMsg(fuelTypeFormControl, 'Fuel type')}}
+						</mat-error>
+					</mat-form-field>
+					<mat-form-field>
+						<input
+							#seats
+							(blur)="formatSeatsInput(seats)"
+							(keydown)="preventKeys($event)"
+							type="number"
+							matInput placeholder="Number of seats"
+							formControlName="numberOfSeats"
+						/>
+						<mat-error *ngIf="numberOfSeatsFormControl.touched && numberOfSeatsFormControl.invalid" >
+							{{getErrMsg(numberOfSeatsFormControl, 'Number of seats')}}
+						</mat-error>
+					</mat-form-field>
+					<mat-form-field>
+						<mat-label for="Extras">Extras</mat-label>
+						<mat-select formControlName="extras" multiple>
+							<mat-option *ngFor="let extra of extras" [value]="extra">
+								{{ extra }}
+							</mat-option>
+						</mat-select>
+						<mat-error *ngIf="extrasFormControl.touched && extrasFormControl.invalid" >
+						</mat-error>
+					</mat-form-field>
+					</div>
+				</div>
+				<div class="button">
+					<a mat-raised-button routerLink="/cars">Back</a>
+					<button type="submit" mat-raised-button>Create</button>
+				</div>
+			</form>
+		</mat-card-content>
+	</mat-card>
+</main>
